@@ -13,15 +13,7 @@
       <!-- Login Form Component -->
       <LoginForm />
 
-      <!-- Footer Link -->
-      <div class="text-center mt-6">
-        <NuxtLink
-          to="/"
-          class="text-text-secondary hover:text-primary-500 transition-colors text-sm"
-        >
-          ← Voltar para o início
-        </NuxtLink>
-      </div>
+
     </div>
   </div>
 </template>

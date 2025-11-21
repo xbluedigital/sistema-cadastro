@@ -26,6 +26,26 @@
           >
             Novo Cadastro
           </NuxtLink>
+          
+          <!-- User Menu -->
+          <div v-if="currentUser" class="flex items-center space-x-4">
+            <span class="text-text-primary text-sm">
+              Olá, <span class="font-semibold">{{ currentUser.email }}</span>
+            </span>
+            <button
+              @click="handleLogout"
+              class="text-text-secondary hover:text-error transition-colors duration-200 text-sm font-medium"
+            >
+              Sair
+            </button>
+          </div>
+          <NuxtLink
+            v-else
+            to="/login"
+            class="text-text-secondary hover:text-primary-500 transition-colors duration-200"
+          >
+            Entrar
+          </NuxtLink>
         </nav>
 
         <!-- Mobile menu button -->
@@ -75,6 +95,27 @@
         >
           Novo Cadastro
         </NuxtLink>
+        
+        <!-- User Menu Mobile -->
+        <div v-if="currentUser" class="border-t border-border pt-2 mt-2">
+          <div class="px-3 py-2 text-text-primary text-sm">
+            Olá, <span class="font-semibold">{{ currentUser.email }}</span>
+          </div>
+          <button
+            @click="handleLogout"
+            class="w-full text-left px-3 py-2 rounded-md text-text-secondary hover:text-error hover:bg-surface-hover transition-colors"
+          >
+            Sair
+          </button>
+        </div>
+        <NuxtLink
+          v-else
+          to="/login"
+          class="block px-3 py-2 rounded-md text-text-secondary hover:text-primary-500 hover:bg-surface-hover transition-colors"
+          @click="closeMobileMenu"
+        >
+          Entrar
+        </NuxtLink>
       </div>
     </div>
   </header>
@@ -82,8 +123,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useAuth } from '~/composables/useAuth'
 
 const isMobileMenuOpen = ref(false)
+const { currentUser, logout } = useAuth()
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -91,5 +134,14 @@ const toggleMobileMenu = () => {
 
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
+}
+
+const handleLogout = async () => {
+  try {
+    await logout()
+    closeMobileMenu()
+  } catch (err) {
+    console.error('Erro ao fazer logout:', err)
+  }
 }
 </script>

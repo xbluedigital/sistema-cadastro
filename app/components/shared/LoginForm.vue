@@ -126,7 +126,6 @@ const { loginForm, signupForm, login, signup, isLoading, error } = useAuth()
 const handleLogin = async () => {
   try {
     await login()
-    // TODO: Redirecionar após login bem-sucedido
   } catch (err) {
     console.error('Erro no login:', err)
   }
@@ -135,7 +134,6 @@ const handleLogin = async () => {
 const handleSignup = async () => {
   try {
     await signup()
-    // TODO: Redirecionar após cadastro bem-sucedido
   } catch (err) {
     console.error('Erro no cadastro:', err)
   }
