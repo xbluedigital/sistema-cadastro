@@ -42,6 +42,7 @@
 import { computed, ref } from 'vue'
 
 interface Props {
+  id?: string
   modelValue?: string | number
   type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
   label?: string
@@ -54,6 +55,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  id: '',
   modelValue: '',
   type: 'text',
   label: '',
@@ -72,7 +74,11 @@ const emit = defineEmits<{
 }>()
 
 const isFocused = ref(false)
-const inputId = computed(() => `input-${Math.random().toString(36).substr(2, 9)}`)
+
+// Use the provided ID or generate a stable one
+const inputId = computed(() => {
+  return props.id || `input-${Math.random().toString(36).substr(2, 9)}`
+})
 
 const wrapperClasses = computed(() => {
   const widthClass = props.fullWidth ? 'w-full' : ''

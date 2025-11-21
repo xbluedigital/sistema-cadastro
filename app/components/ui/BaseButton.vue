@@ -36,9 +36,9 @@ const buttonClasses = computed(() => {
   const baseClasses = 'font-bold rounded-lg transition-all duration-300 inline-flex items-center justify-center'
   
   const variantClasses = {
-    primary: 'bg-accent text-text-inverse hover:bg-accent-hover hover:shadow-glow-orange disabled:opacity-50 disabled:cursor-not-allowed',
+    primary: 'bg-gradient-primary text-white hover:shadow-glow-orange disabled:opacity-50 disabled:cursor-not-allowed',
     secondary: 'bg-surface text-text-primary hover:bg-surface-hover border border-border disabled:opacity-50 disabled:cursor-not-allowed',
-    outline: 'bg-transparent border-2 border-accent text-text-primary hover:bg-surface-hover disabled:opacity-50 disabled:cursor-not-allowed',
+    outline: 'bg-transparent border-2 border-primary-500 text-primary-500 hover:bg-primary-50 disabled:opacity-50 disabled:cursor-not-allowed',
     ghost: 'bg-transparent text-text-primary hover:bg-surface-hover disabled:opacity-50 disabled:cursor-not-allowed',
   }
   
