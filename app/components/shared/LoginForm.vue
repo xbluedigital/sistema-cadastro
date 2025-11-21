@@ -54,9 +54,15 @@
             variant="primary"
             size="lg"
             full-width
+            @click="handleLogin"
+            :disabled="isLoading"
           >
-            Entrar
+            {{ isLoading ? 'Entrando...' : 'Entrar' }}
           </BaseButton>
+          
+          <p v-if="error" class="text-error text-sm text-center">
+            {{ error }}
+          </p>
         </div>
 
         <!-- Signup Tab -->
@@ -91,9 +97,15 @@
             variant="primary"
             size="lg"
             full-width
+            @click="handleSignup"
+            :disabled="isLoading"
           >
-            Criar Conta
+            {{ isLoading ? 'Criando...' : 'Criar Conta' }}
           </BaseButton>
+          
+          <p v-if="error" class="text-error text-sm text-center">
+            {{ error }}
+          </p>
         </div>
       </div>
     </div>
@@ -102,20 +114,30 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import BaseInput from '~/components/BaseInput.vue'
-import PasswordInput from '~/components/PasswordInput.vue'
-import BaseButton from '~/components/BaseButton.vue'
+import BaseInput from '~/components/ui/BaseInput.vue'
+import PasswordInput from '~/components/ui/PasswordInput.vue'
+import BaseButton from '~/components/ui/BaseButton.vue'
+import { useAuth } from '~/composables/useAuth'
 
 const activeTab = ref<'login' | 'signup'>('login')
 
-const loginForm = ref({
-  email: '',
-  password: ''
-})
+const { loginForm, signupForm, login, signup, isLoading, error } = useAuth()
 
-const signupForm = ref({
-  email: '',
-  password: '',
-  confirmPassword: ''
-})
+const handleLogin = async () => {
+  try {
+    await login()
+    // TODO: Redirecionar após login bem-sucedido
+  } catch (err) {
+    console.error('Erro no login:', err)
+  }
+}
+
+const handleSignup = async () => {
+  try {
+    await signup()
+    // TODO: Redirecionar após cadastro bem-sucedido
+  } catch (err) {
+    console.error('Erro no cadastro:', err)
+  }
+}
 </script>
