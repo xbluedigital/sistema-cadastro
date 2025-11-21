@@ -31,10 +31,36 @@ export const useFuncionarios = () => {
     }
   }
 
+  const criarFuncionario = async (funcionario: Omit<Funcionario, 'id' | 'created_at'>) => {
+    isLoading.value = true
+    error.value = null
+
+    try {
+      const { data, error: insertError } = await $supabase
+        .from('funcionarios')
+        .insert([funcionario])
+        .select()
+        .single()
+
+      if (insertError) {
+        throw new Error(insertError.message)
+      }
+
+      return { success: true, data }
+    } catch (err) {
+      error.value = err instanceof Error ? err.message : 'Erro ao criar funcionário'
+      console.error('Erro ao criar funcionário:', err)
+      return { success: false, error: error.value }
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   return {
     funcionarios,
     isLoading,
     error,
-    listaFuncionarios
+    listaFuncionarios,
+    criarFuncionario
   }
 }

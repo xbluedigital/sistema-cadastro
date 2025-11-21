@@ -10,7 +10,7 @@ export interface Funcionario {
 
 export interface FuncionarioCreate {
   nome: string
-  cargo?: string
+  cargo: string
   endereco?: string
   email?: string
   salario?: number

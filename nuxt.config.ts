@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   modules: ['@nuxtjs/tailwindcss'],
   ssr: true,
+  css: ['vue-sonner/style.css'],
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
