@@ -1,9 +1,18 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const { $supabase } = useNuxtApp()
+  // Executar apenas no lado do cliente
+  if (process.server) return
+
+  const nuxtApp = useNuxtApp()
   const currentUser = useState<any>('currentUser')
 
+  // Verificar se o plugin está disponível
+  if (!nuxtApp.$supabase) {
+    console.warn('Supabase não está disponível ainda')
+    return
+  }
+
   // Verificar sessão no Supabase
-  const { data: { session } } = await $supabase.auth.getSession()
+  const { data: { session } } = await nuxtApp.$supabase.auth.getSession()
 
   // Rotas públicas que não precisam de autenticação
   const publicRoutes = ['/login']

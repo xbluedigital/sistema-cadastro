@@ -24,6 +24,13 @@
       </div>
     </section>
 
+    <!-- Funcionários Table Section -->
+    <section class="py-8 px-4">
+      <div class="max-w-7xl mx-auto">
+        <FuncionariosTable />
+      </div>
+    </section>
+
     <!-- Features Section -->
     <section class="py-16 px-4 bg-surface">
       <div class="max-w-6xl mx-auto">
@@ -60,6 +67,7 @@
 
 <script setup lang="ts">
 import BaseButton from '~/components/ui/BaseButton.vue'
+import FuncionariosTable from '~/components/shared/FuncionariosTable.vue'
 
 definePageMeta({
   layout: 'default-layout'
